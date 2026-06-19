@@ -1068,8 +1068,48 @@ footer::after{content:'';position:absolute;bottom:-100px;right:-40px;width:340px
 
 </style>
 <link rel="icon" type="image/png" href="assets/images/favicon.png">
+<!-- ===== Consent Mode v2 — default (must run BEFORE GTM loads) ===== -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+
+// 1. Read any previously saved consent choice
+var __savedConsent = null;
+try { __savedConsent = JSON.parse(localStorage.getItem('cookie_consent_v1')); } catch(e){}
+
+// 2. Set Consent Mode v2 defaults.
+//    functionality_storage and security_storage are strictly necessary —
+//    they are always granted and are never offered as a toggle.
+//    Everything else defaults to "denied" until the user actively agrees.
+gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'analytics_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'functionality_storage': 'granted',
+  'security_storage': 'granted',
+  'wait_for_update': 500
+});
+
+// 3. If the user already made a choice in a previous visit, apply it immediately
+if (__savedConsent) {
+  gtag('consent', 'update', __savedConsent);
+}
+</script>
+
+<!-- ===== Google Tag Manager (head) ===== -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLD63DV5');</script>
+<!-- ===== End Google Tag Manager (head) ===== -->
 </head>
 <body>
+<!-- ===== Google Tag Manager (noscript) ===== -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WLD63DV5"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- ===== End Google Tag Manager (noscript) ===== -->
 
 <!-- NAV -->
 <nav id="nav">
@@ -2201,8 +2241,8 @@ document.addEventListener('DOMContentLoaded', function(){
   <div class="sbar-mobile" style="display:none;flex-direction:column;gap:8px;padding:12px 14px;">
     <!-- Row 1: label -->
     <span style="color:#fff;font-size:13px;font-weight:700;letter-spacing:.02em;text-align:center">🎉 Early Bird 20% OFF — Offer ends in</span>
-    <!-- Row 2: countdown left, button right -->
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+    <!-- Row 2: countdown + button, centered as one compact group so spacing stays consistent across phone sizes -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:nowrap;max-width:420px;margin:0 auto;width:100%;">
       <div style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
         <div style="display:flex;flex-direction:column;align-items:center;background:rgba(0,0,0,.28);border-radius:5px;padding:5px 9px;min-width:46px;">
           <span style="color:#fff;font-weight:800;font-size:20px;line-height:1.1;font-variant-numeric:tabular-nums" id="bb-dm"></span>
@@ -2350,5 +2390,222 @@ function toggleGalleryMore(btn) {
 
 </script>
 <div id="mq-tooltip"></div>
+<!-- ===== COOKIE CONSENT BANNER ===== -->
+<style>
+/* Cookie banner uses the site's own dark/amber brand palette and the same
+   radial "glow" blobs as .sec-dark / .sec-deep elsewhere on the site.
+   It sits ABOVE the sticky booking bar via the --cc-offset variable, which
+   JS keeps in sync with the booking bar's real height so they never overlap. */
+:root{--cc-offset:16px}
+
+#cc-banner{position:fixed;left:auto;right:24px;bottom:var(--cc-offset);width:560px;max-width:calc(100vw - 32px);
+  background:linear-gradient(160deg,rgba(10,10,10,.78) 0%,rgba(20,18,16,.78) 55%,rgba(26,24,21,.78) 100%);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden;
+  box-shadow:0 14px 50px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04);padding:28px 32px;z-index:99998;
+  font-family:var(--font-body),sans-serif;color:#fff;
+  transform:translateY(20px);opacity:0;pointer-events:none;transition:transform .4s ease,opacity .4s ease,bottom .35s ease}
+#cc-banner.show{transform:translateY(0);opacity:1;pointer-events:all}
+#cc-banner::before{content:'';position:absolute;top:-110px;right:-70px;width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(224,123,26,.18) 0%,rgba(224,123,26,.06) 45%,transparent 70%);
+  pointer-events:none;z-index:0}
+#cc-banner::after{content:'';position:absolute;bottom:-90px;left:-50px;width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(224,123,26,.12) 0%,rgba(224,123,26,.04) 45%,transparent 70%);
+  pointer-events:none;z-index:0}
+#cc-banner>*{position:relative;z-index:1}
+#cc-banner h4{font-family:var(--font-display),sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--amber-light);margin-bottom:10px}
+#cc-banner p{font-size:14px;line-height:1.65;color:rgba(255,255,255,.78);margin-bottom:20px}
+#cc-banner a{color:var(--amber-light);text-decoration:underline}
+.cc-row{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.cc-reject{background:none;border:none;color:rgba(255,255,255,.45);font-size:12px;font-weight:400;
+  letter-spacing:normal;text-decoration:underline;cursor:pointer;padding:6px 4px 0;
+  border-radius:0;white-space:nowrap;width:100%;text-align:right;order:3}
+.cc-reject:hover{color:rgba(255,255,255,.7);background:none}
+.cc-manage,.cc-accept{text-align:center;border-radius:5px;font-size:13px;font-weight:700;
+  letter-spacing:.03em;cursor:pointer;transition:border-color .2s,background .2s,transform .15s,box-shadow .2s;
+  padding:13px 22px;white-space:nowrap}
+.cc-manage{background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff}
+.cc-manage:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.06)}
+.cc-accept{background:linear-gradient(135deg,var(--amber) 0%,var(--amber-dark) 100%);border:none;color:#fff;
+  text-transform:uppercase;box-shadow:0 4px 18px rgba(224,123,26,.45)}
+.cc-accept:hover{background:linear-gradient(135deg,var(--amber-light) 0%,var(--amber) 100%);transform:translateY(-1px);box-shadow:0 6px 24px rgba(224,123,26,.6)}
+
+#cc-modal{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:100000;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .25s ease}
+#cc-modal.show{opacity:1;pointer-events:all}
+.cc-modal-box{background:linear-gradient(160deg,#0a0a0a 0%,#141210 55%,#1a1815 100%);
+  border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden;
+  max-width:480px;width:100%;max-height:88vh;overflow-y:auto;padding:28px 26px;color:#fff;
+  font-family:var(--font-body),sans-serif;position:relative}
+.cc-modal-box::before{content:'';position:absolute;top:-100px;right:-70px;width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(224,123,26,.13) 0%,rgba(224,123,26,.04) 45%,transparent 70%);
+  pointer-events:none;z-index:0}
+.cc-modal-box>*{position:relative;z-index:1}
+.cc-modal-box h2{font-family:var(--font-display),sans-serif;font-size:20px;font-weight:700;
+  letter-spacing:.02em;text-transform:uppercase;color:#fff;margin-bottom:8px}
+.cc-modal-box>p{font-size:13.5px;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:20px}
+.cc-close{position:absolute;top:18px;right:18px;background:none;border:none;color:rgba(255,255,255,.5);
+  font-size:20px;cursor:pointer;line-height:1;padding:4px;z-index:2}
+.cc-close:hover{color:var(--amber-light)}
+.cc-cat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:9px;
+  padding:15px 16px;margin-bottom:12px;display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.cc-cat-txt h3{font-family:var(--font-display),sans-serif;font-size:13px;font-weight:700;letter-spacing:.02em;
+  text-transform:uppercase;color:var(--amber-light);margin-bottom:4px}
+.cc-cat-txt p{font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.5}
+.cc-switch{position:relative;width:42px;height:24px;flex-shrink:0;margin-top:2px}
+.cc-switch input{opacity:0;width:0;height:0}
+.cc-slider{position:absolute;inset:0;background:rgba(255,255,255,.18);border-radius:24px;
+  cursor:pointer;transition:background .2s}
+.cc-slider::before{content:'';position:absolute;width:18px;height:18px;left:3px;top:3px;
+  background:#fff;border-radius:50%;transition:transform .2s}
+.cc-switch input:checked + .cc-slider{background:linear-gradient(135deg,var(--amber) 0%,var(--amber-dark) 100%)}
+.cc-switch input:checked + .cc-slider::before{transform:translateX(18px)}
+.cc-switch input:disabled + .cc-slider{cursor:not-allowed;opacity:.85}
+.cc-modal-row{display:flex;justify-content:flex-end;gap:10px;margin-top:18px;flex-wrap:wrap}
+
+/* ── Responsive: tablets & phones — banner becomes a full-width bottom sheet,
+   buttons stack for comfortable tapping, always lifted above the sticky
+   booking bar via --cc-offset (set by JS) ── */
+@media(max-width:768px){
+  #cc-banner{right:10px;left:10px;width:auto;max-width:none;bottom:var(--cc-offset);padding:20px 18px 18px}
+  .cc-row{justify-content:center}
+  .cc-manage,.cc-accept{flex:1 1 calc(50% - 5px);padding:13px 10px}
+  .cc-reject{margin-right:0;width:100%;text-align:center;order:3;flex:1 1 100%}
+}
+@media(max-width:380px){
+  #cc-banner{padding:18px 14px 16px}
+  #cc-banner p{font-size:13px;margin-bottom:16px}
+  .cc-manage,.cc-accept{font-size:12.5px;padding:12px 8px}
+}
+</style>
+
+<div id="cc-banner" role="dialog" aria-label="Cookie consent">
+  <h4>Privacy &amp; Cookies</h4>
+  <p>We use cookies to improve your experience, analyze traffic, and personalize content. You can accept all cookies or manage your preferences. See our <a href="/cookie-policy" target="_blank" rel="noopener">Cookie Policy</a> and <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a> for details.</p>
+  <div class="cc-row">
+    <button class="cc-reject" onclick="ccRejectAll()">Reject non-essential</button>
+    <button class="cc-manage" onclick="ccOpenModal()">Manage preferences</button>
+    <button class="cc-accept" onclick="ccAcceptAll()">Accept all</button>
+  </div>
+</div>
+
+<div id="cc-modal" role="dialog" aria-modal="true" aria-label="Cookie preferences">
+  <div class="cc-modal-box">
+    <button class="cc-close" onclick="ccCloseModal()" aria-label="Close">×</button>
+    <h2>Cookie preferences</h2>
+    <p>Choose which cookies you want to accept. Essential cookies are required for the site to function and cannot be disabled.</p>
+
+    <div class="cc-cat">
+      <div class="cc-cat-txt">
+        <h3>Essential cookies</h3>
+        <p>Required for core site functionality and security. Always active.</p>
+      </div>
+      <label class="cc-switch"><input type="checkbox" checked disabled><span class="cc-slider"></span></label>
+    </div>
+
+    <div class="cc-cat">
+      <div class="cc-cat-txt">
+        <h3>Analytics cookies</h3>
+        <p>Help us understand how visitors use our site.</p>
+      </div>
+      <label class="cc-switch"><input type="checkbox" id="cc-toggle-analytics"><span class="cc-slider"></span></label>
+    </div>
+
+    <div class="cc-cat">
+      <div class="cc-cat-txt">
+        <h3>Marketing cookies</h3>
+        <p>Used to deliver relevant ads and measure ad campaigns.</p>
+      </div>
+      <label class="cc-switch"><input type="checkbox" id="cc-toggle-marketing"><span class="cc-slider"></span></label>
+    </div>
+
+    <div class="cc-modal-row">
+      <button class="cc-manage" onclick="ccSavePreferences()">Save preferences</button>
+      <button class="cc-accept" onclick="ccAcceptAll()">Accept all</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'cookie_consent_v1';
+
+  function buildConsent(analytics, marketing){
+    return {
+      // strictly necessary — always granted, never offered as a toggle
+      'functionality_storage': 'granted',
+      'security_storage': 'granted',
+      // analytics toggle
+      'analytics_storage': analytics ? 'granted' : 'denied',
+      // marketing toggle controls all three ads-related signals together
+      'ad_storage': marketing ? 'granted' : 'denied',
+      'ad_user_data': marketing ? 'granted' : 'denied',
+      'ad_personalization': marketing ? 'granted' : 'denied'
+    };
+  }
+
+  function applyConsent(consent){
+    gtag('consent', 'update', consent);
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(consent)); }catch(e){}
+    // Let GTM-side tags react to the explicit consent decision (e.g. fire on first grant)
+    window.dataLayer.push({'event':'consent_update', 'consent_state': consent});
+    hideBanner();
+    closeModal();
+  }
+
+  function showBanner(){ document.getElementById('cc-banner').classList.add('show'); }
+  function hideBanner(){ document.getElementById('cc-banner').classList.remove('show'); }
+  window.ccOpenModal = function(){
+    var saved = getSaved();
+    document.getElementById('cc-toggle-analytics').checked = saved ? saved.analytics_storage === 'granted' : false;
+    document.getElementById('cc-toggle-marketing').checked = saved ? saved.ad_storage === 'granted' : false;
+    document.getElementById('cc-modal').classList.add('show');
+  };
+  window.ccCloseModal = function(){ document.getElementById('cc-modal').classList.remove('show'); };
+  function closeModal(){ window.ccCloseModal(); }
+
+  window.ccAcceptAll = function(){ applyConsent(buildConsent(true, true)); };
+  window.ccRejectAll = function(){ applyConsent(buildConsent(false, false)); };
+  window.ccSavePreferences = function(){
+    var analytics = document.getElementById('cc-toggle-analytics').checked;
+    var marketing = document.getElementById('cc-toggle-marketing').checked;
+    applyConsent(buildConsent(analytics, marketing));
+  };
+
+  function getSaved(){
+    try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)); }catch(e){ return null; }
+  }
+
+  // Keep the cookie banner lifted above the sticky booking bar at all times,
+  // on every screen size — re-measured on scroll/resize since the booking
+  // bar's own height differs between mobile and desktop layouts.
+  function syncOffset(){
+    var bar = document.getElementById('sticky-bar');
+    var banner = document.getElementById('cc-banner');
+    if(!bar || !banner) return;
+    var barVisible = bar.style.transform === 'translateY(0px)' || bar.style.transform === '' || bar.style.transform === 'translateY(0)';
+    var gap = 14;
+    var offset = barVisible ? (bar.offsetHeight + gap) : 16;
+    document.documentElement.style.setProperty('--cc-offset', offset + 'px');
+  }
+  window.addEventListener('scroll', syncOffset, {passive:true});
+  window.addEventListener('resize', syncOffset);
+  window.addEventListener('load', syncOffset);
+  setInterval(syncOffset, 400); // cheap safety net in case the bar's transition timing is missed
+
+  // Show the banner only if the user hasn't made a choice yet
+  document.addEventListener('DOMContentLoaded', function(){
+    syncOffset();
+    if(!getSaved()){ showBanner(); }
+  });
+
+  // Optional: expose a way to reopen preferences later, e.g. from a footer link
+  window.ccReopenPreferences = window.ccOpenModal;
+})();
+</script>
+<!-- ===== END COOKIE CONSENT BANNER ===== -->
+
 </body>
 </html>
