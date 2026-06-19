@@ -2417,11 +2417,14 @@ function toggleGalleryMore(btn) {
   text-transform:uppercase;color:var(--amber-light);margin-bottom:10px}
 #cc-banner p{font-size:14px;line-height:1.65;color:rgba(255,255,255,.78);margin-bottom:20px}
 #cc-banner a{color:var(--amber-light);text-decoration:underline}
-.cc-row{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
-.cc-reject{background:none;border:none;color:rgba(255,255,255,.45);font-size:12px;font-weight:400;
-  letter-spacing:normal;text-decoration:underline;cursor:pointer;padding:6px 4px 0;
-  border-radius:0;white-space:nowrap;width:100%;text-align:right;order:3}
-.cc-reject:hover{color:rgba(255,255,255,.7);background:none}
+.cc-row{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:10px}
+.cc-row>.cc-reject{justify-self:center}
+.cc-row>.cc-manage{justify-self:center}
+.cc-row>.cc-accept{justify-self:center}
+.cc-reject{background:none;border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.29);font-size:12px;font-weight:400;
+  letter-spacing:normal;text-decoration:none;cursor:pointer;padding:13px 22px;
+  border-radius:5px;white-space:nowrap}
+.cc-reject:hover{color:rgba(255,255,255,.5);background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.28)}
 .cc-manage,.cc-accept{text-align:center;border-radius:5px;font-size:13px;font-weight:700;
   letter-spacing:.03em;cursor:pointer;transition:border-color .2s,background .2s,transform .15s,box-shadow .2s;
   padding:13px 22px;white-space:nowrap}
@@ -2470,9 +2473,12 @@ function toggleGalleryMore(btn) {
    booking bar via --cc-offset (set by JS) ── */
 @media(max-width:768px){
   #cc-banner{right:10px;left:10px;width:auto;max-width:none;bottom:var(--cc-offset);padding:20px 18px 18px}
-  .cc-row{justify-content:center}
-  .cc-manage,.cc-accept{flex:1 1 calc(50% - 5px);padding:13px 10px}
-  .cc-reject{margin-right:0;width:100%;text-align:center;order:3;flex:1 1 100%}
+  .cc-row{display:flex;justify-content:center;flex-wrap:wrap}
+  .cc-manage,.cc-accept{flex:1 1 calc(50% - 5px);padding:13px 10px;justify-self:auto}
+  .cc-reject{margin-right:0;width:100%;text-align:center;order:3;flex:1 1 100%;justify-self:auto;
+    background:none;border:none;color:rgba(255,255,255,.45);font-weight:400;
+    text-decoration:underline;padding:6px 4px;border-radius:0}
+  .cc-reject:hover{color:rgba(255,255,255,.7);background:none;border-color:transparent}
 }
 @media(max-width:380px){
   #cc-banner{padding:18px 14px 16px}
@@ -2483,7 +2489,7 @@ function toggleGalleryMore(btn) {
 
 <div id="cc-banner" role="dialog" aria-label="Cookie consent">
   <h4>Privacy &amp; Cookies</h4>
-  <p>We use cookies to improve your experience, analyze traffic, and personalize content. You can accept all cookies or manage your preferences. See our <a href="/cookie-policy" target="_blank" rel="noopener">Cookie Policy</a> and <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a> for details.</p>
+  <p>We use cookies to improve your experience, analyze traffic, and personalize content. You can accept all cookies or manage your preferences.<br>See our <a href="https://sia.ie/cookie-policy-eu/?cmplz_region_redirect=true" target="_blank" rel="noopener">Cookie Policy</a> and <a href="https://sia.ie/privacy-statement-eu/?cmplz_region_redirect=true&amp;cmplz-region=eu" target="_blank" rel="noopener">Privacy Policy</a> for details.</p>
   <div class="cc-row">
     <button class="cc-reject" onclick="ccRejectAll()">Reject non-essential</button>
     <button class="cc-manage" onclick="ccOpenModal()">Manage preferences</button>
@@ -2548,9 +2554,8 @@ function toggleGalleryMore(btn) {
 
   function applyConsent(consent){
     gtag('consent', 'update', consent);
+    console.log('[Cookie Consent] gtag consent update sent:', consent); // remove once verified in production
     try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(consent)); }catch(e){}
-    // Let GTM-side tags react to the explicit consent decision (e.g. fire on first grant)
-    window.dataLayer.push({'event':'consent_update', 'consent_state': consent});
     hideBanner();
     closeModal();
   }
