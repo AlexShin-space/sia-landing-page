@@ -1201,7 +1201,7 @@ footer::after{content:'';position:absolute;bottom:-100px;right:-40px;width:340px
         <div class="stl-time">10:00 – 10:30</div>
         <div class="stl-dot"></div>
         <div class="stl-card">
-          <div class="stl-icon">🪙</div>
+          <div class="stl-icon">🔨</div>
           <div class="stl-body">
             <div class="stl-body-row">
               <span class="stl-time-badge" style="display:none">10:00 – 10:30</span>
@@ -2088,7 +2088,7 @@ if(testiWrap){
 }
 window.addEventListener('resize',updateSlider);
 (function(){
-  const end=new Date(Date.now()+30*86400e3+20*3600e3+5*60e3);
+  const end = new Date('2026-08-01T23:59:59');
   const ids=[['t-d','p-d'],['t-h','p-h'],['t-m','p-m'],['t-s','p-s']];
   function tick(){
     const diff=Math.max(0,end-Date.now());
@@ -2187,43 +2187,45 @@ document.addEventListener('DOMContentLoaded', function(){
   <div class="sbar-desktop" style="display:flex;align-items:center;justify-content:center;gap:20px;padding:13px 4%;">
     <span style="color:#fff;font-weight:700;font-size:15px;">🎉 Early Bird 20% OFF — Offer ends in</span>
     <div style="display:flex;align-items:flex-start;gap:5px;">
-      <div style="text-align:center;"><span style="display:block;background:rgba(0,0,0,.22);color:#fff;font-weight:700;font-size:22px;padding:5px 12px;border-radius:5px;min-width:46px;" id="bb-d">30</span><span style="display:block;font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;margin-top:2px;">Days</span></div>
+      <div style="text-align:center;"><span style="display:block;background:rgba(0,0,0,.22);color:#fff;font-weight:700;font-size:22px;padding:5px 12px;border-radius:5px;min-width:46px;" id="bb-d"></span><span style="display:block;font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;margin-top:2px;">Days</span></div>
       <span style="color:rgba(255,255,255,.5);font-size:20px;font-weight:700;padding-top:4px;">:</span>
-      <div style="text-align:center;"><span style="display:block;background:rgba(0,0,0,.22);color:#fff;font-weight:700;font-size:22px;padding:5px 12px;border-radius:5px;min-width:46px;" id="bb-h">20</span><span style="display:block;font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;margin-top:2px;">Hrs</span></div>
+      <div style="text-align:center;"><span style="display:block;background:rgba(0,0,0,.22);color:#fff;font-weight:700;font-size:22px;padding:5px 12px;border-radius:5px;min-width:46px;" id="bb-h"></span><span style="display:block;font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;margin-top:2px;">Hrs</span></div>
       <span style="color:rgba(255,255,255,.5);font-size:20px;font-weight:700;padding-top:4px;">:</span>
-      <div style="text-align:center;"><span style="display:block;background:rgba(0,0,0,.22);color:#fff;font-weight:700;font-size:22px;padding:5px 12px;border-radius:5px;min-width:46px;" id="bb-m">04</span><span style="display:block;font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;margin-top:2px;">Min</span></div>
+      <div style="text-align:center;"><span style="display:block;background:rgba(0,0,0,.22);color:#fff;font-weight:700;font-size:22px;padding:5px 12px;border-radius:5px;min-width:46px;" id="bb-m"></span><span style="display:block;font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;margin-top:2px;">Min</span></div>
       <span style="color:rgba(255,255,255,.5);font-size:20px;font-weight:700;padding-top:4px;">:</span>
-      <div style="text-align:center;"><span style="display:block;background:rgba(0,0,0,.22);color:#fff;font-weight:700;font-size:22px;padding:5px 12px;border-radius:5px;min-width:46px;" id="bb-s">54</span><span style="display:block;font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;margin-top:2px;">Sec</span></div>
+      <div style="text-align:center;"><span style="display:block;background:rgba(0,0,0,.22);color:#fff;font-weight:700;font-size:22px;padding:5px 12px;border-radius:5px;min-width:46px;" id="bb-s"></span><span style="display:block;font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;margin-top:2px;">Sec</span></div>
     </div>
     <a href="https://sia.ie/summer-camps-for-children-in-ireland/" style="background:#fff;color:#B06010;padding:11px 24px;border-radius:5px;font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;" target="_blank" rel="noopener">Book Now</a>
   </div>
-  <!-- Mobile layout: pill-style countdown -->
-  <div class="sbar-mobile" style="display:none;align-items:center;justify-content:space-between;gap:0;padding:9px 14px;">
-    <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-      <span style="color:#fff;font-size:11px;font-weight:700;white-space:nowrap;margin-right:4px;letter-spacing:.02em">Early bird sale</span>
-      <div style="display:flex;align-items:center;gap:2px;">
-        <div style="display:flex;flex-direction:column;align-items:center;background:rgba(0,0,0,.28);border-radius:4px;padding:2px 5px;">
-          <span style="color:#fff;font-weight:800;font-size:15px;line-height:1.1;font-variant-numeric:tabular-nums" id="bb-dm">30</span>
-          <span style="color:rgba(255,255,255,.5);font-size:7px;letter-spacing:.06em;text-transform:uppercase">day</span>
+  <!-- Mobile layout -->
+  <div class="sbar-mobile" style="display:none;flex-direction:column;gap:8px;padding:12px 14px;">
+    <!-- Row 1: label -->
+    <span style="color:#fff;font-size:13px;font-weight:700;letter-spacing:.02em;text-align:center">🎉 Early Bird 20% OFF — Offer ends in</span>
+    <!-- Row 2: countdown left, button right -->
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+      <div style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+        <div style="display:flex;flex-direction:column;align-items:center;background:rgba(0,0,0,.28);border-radius:5px;padding:5px 9px;min-width:46px;">
+          <span style="color:#fff;font-weight:800;font-size:20px;line-height:1.1;font-variant-numeric:tabular-nums" id="bb-dm"></span>
+          <span style="color:rgba(255,255,255,.6);font-size:8px;letter-spacing:.07em;text-transform:uppercase;margin-top:1px;">days</span>
         </div>
-        <span style="color:rgba(255,255,255,.35);font-size:10px;line-height:1;padding-bottom:5px">:</span>
-        <div style="display:flex;flex-direction:column;align-items:center;background:rgba(0,0,0,.28);border-radius:4px;padding:2px 5px;">
-          <span style="color:#fff;font-weight:800;font-size:15px;line-height:1.1;font-variant-numeric:tabular-nums" id="bb-hm">20</span>
-          <span style="color:rgba(255,255,255,.5);font-size:7px;letter-spacing:.06em;text-transform:uppercase">hrs</span>
+        <span style="color:rgba(255,255,255,.4);font-size:17px;font-weight:700;margin-bottom:8px;">:</span>
+        <div style="display:flex;flex-direction:column;align-items:center;background:rgba(0,0,0,.28);border-radius:5px;padding:5px 9px;min-width:46px;">
+          <span style="color:#fff;font-weight:800;font-size:20px;line-height:1.1;font-variant-numeric:tabular-nums" id="bb-hm"></span>
+          <span style="color:rgba(255,255,255,.6);font-size:8px;letter-spacing:.07em;text-transform:uppercase;margin-top:1px;">hrs</span>
         </div>
-        <span style="color:rgba(255,255,255,.35);font-size:10px;line-height:1;padding-bottom:5px">:</span>
-        <div style="display:flex;flex-direction:column;align-items:center;background:rgba(0,0,0,.28);border-radius:4px;padding:2px 5px;">
-          <span style="color:#fff;font-weight:800;font-size:15px;line-height:1.1;font-variant-numeric:tabular-nums" id="bb-mm">04</span>
-          <span style="color:rgba(255,255,255,.5);font-size:7px;letter-spacing:.06em;text-transform:uppercase">min</span>
+        <span style="color:rgba(255,255,255,.4);font-size:17px;font-weight:700;margin-bottom:8px;">:</span>
+        <div style="display:flex;flex-direction:column;align-items:center;background:rgba(0,0,0,.28);border-radius:5px;padding:5px 9px;min-width:46px;">
+          <span style="color:#fff;font-weight:800;font-size:20px;line-height:1.1;font-variant-numeric:tabular-nums" id="bb-mm"></span>
+          <span style="color:rgba(255,255,255,.6);font-size:8px;letter-spacing:.07em;text-transform:uppercase;margin-top:1px;">min</span>
         </div>
-        <span style="color:rgba(255,255,255,.35);font-size:10px;line-height:1;padding-bottom:5px">:</span>
-        <div style="display:flex;flex-direction:column;align-items:center;background:rgba(0,0,0,.28);border-radius:4px;padding:2px 5px;">
-          <span style="color:#fff;font-weight:800;font-size:15px;line-height:1.1;font-variant-numeric:tabular-nums" id="bb-sm">54</span>
-          <span style="color:rgba(255,255,255,.5);font-size:7px;letter-spacing:.06em;text-transform:uppercase">sec</span>
+        <span style="color:rgba(255,255,255,.4);font-size:17px;font-weight:700;margin-bottom:8px;">:</span>
+        <div style="display:flex;flex-direction:column;align-items:center;background:rgba(0,0,0,.28);border-radius:5px;padding:5px 9px;min-width:46px;">
+          <span style="color:#fff;font-weight:800;font-size:20px;line-height:1.1;font-variant-numeric:tabular-nums" id="bb-sm"></span>
+          <span style="color:rgba(255,255,255,.6);font-size:8px;letter-spacing:.07em;text-transform:uppercase;margin-top:1px;">sec</span>
         </div>
       </div>
+      <a href="https://sia.ie/summer-camps-for-children-in-ireland/" style="background:#fff;color:#B06010;padding:10px 14px;border-radius:5px;font-weight:700;font-size:12px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;white-space:nowrap;flex-shrink:0;" target="_blank" rel="noopener">Book Now</a>
     </div>
-    <a href="https://sia.ie/summer-camps-for-children-in-ireland/" style="background:#fff;color:#B06010;padding:8px 15px;border-radius:4px;font-weight:700;font-size:11px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;white-space:nowrap;flex-shrink:0;" target="_blank" rel="noopener">Book Now</a>
   </div>
 </div>
 <style>
@@ -2233,9 +2235,9 @@ document.addEventListener('DOMContentLoaded', function(){
 }
 </style>
 <script>
-// countdown
-var _e=new Date(Date.now()+30*864e5+20*36e5+4*6e4);
-setInterval(function(){
+// countdown — tick runs immediately so numbers are never blank on first paint
+var _e=new Date('2026-07-14T23:59:59');
+function _tick(){
   var d=Math.max(0,_e-Date.now()),p=function(n){return String(Math.floor(n)).padStart(2,'0');};
   var bd=document.getElementById('bb-d'),bh=document.getElementById('bb-h'),bm=document.getElementById('bb-m'),bs=document.getElementById('bb-s');
   var bdm=document.getElementById('bb-dm'),bhm=document.getElementById('bb-hm'),bmm=document.getElementById('bb-mm'),bsm=document.getElementById('bb-sm');
@@ -2247,7 +2249,9 @@ setInterval(function(){
   if(bhm)bhm.textContent=p(d%864e5/36e5);
   if(bmm)bmm.textContent=p(d%36e5/6e4);
   if(bsm)bsm.textContent=p(d%6e4/1e3);
-},1000);
+}
+_tick();
+setInterval(_tick,1000);
 // show bar with smooth transition when hero button scrolled away
 var _bar=document.getElementById('sticky-bar');
 if(_bar){
