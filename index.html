@@ -1598,10 +1598,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="p-timer reveal">
       <span class="p-timer-lbl">Early Bird offer ends in</span>
-      <div class="tunit" id="p-d">30</div><span class="tsep">:</span>
-      <div class="tunit" id="p-h">20</div><span class="tsep">:</span>
-      <div class="tunit" id="p-m">05</div><span class="tsep">:</span>
-      <div class="tunit" id="p-s">00</div>
+      <div class="trow">
+        <div style="text-align:center"><div class="tunit" id="p-d">00</div><span class="tlbl">Days</span></div>
+        <span class="tsep">:</span>
+        <div style="text-align:center"><div class="tunit" id="p-h">00</div><span class="tlbl">Hrs</span></div>
+        <span class="tsep">:</span>
+        <div style="text-align:center"><div class="tunit" id="p-m">00</div><span class="tlbl">Min</span></div>
+        <span class="tsep">:</span>
+        <div style="text-align:center"><div class="tunit" id="p-s">00</div><span class="tlbl">Sec</span></div>
+      </div>
     </div>
     <div class="pgrid reveal" id="pgrid">
       <div class="pcard"><div class="picon">🏆</div><div class="pnow">€40</div><div class="pwas"></div><div class="pname">1 Day Camp</div><div class="psave" data-txt="SINGLE DAY"></div><ul class="pfeats" data-save=""><li><span class="pchk">✓</span>Hands-on archaeology</li><li><span class="pchk">✓</span>Crafts &amp; games</li><li><span class="pchk">✓</span>Expert supervision</li><li><span class="pchk">✓</span>Take-home craft</li></ul><a href="https://sia.ie/summer-camps-for-children-in-ireland/" class="pcta" target="_blank" rel="noopener">Book Now</a></div>
@@ -2128,7 +2133,7 @@ if(testiWrap){
 }
 window.addEventListener('resize',updateSlider);
 (function(){
-  const end = new Date('2026-08-01T23:59:59');
+  const end = new Date('2026-07-14T23:59:59');
   const ids=[['t-d','p-d'],['t-h','p-h'],['t-m','p-m'],['t-s','p-s']];
   function tick(){
     const diff=Math.max(0,end-Date.now());
