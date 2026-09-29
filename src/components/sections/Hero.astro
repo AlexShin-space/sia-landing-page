@@ -1,0 +1,56 @@
+---
+import site from '../../data/site.json';
+import { cornerWeb, heroWeb } from '../../lib/corner-web';
+
+// Both webs are generated (lib/corner-web.ts) rather than the hand-drawn CornerWeb.astro the
+// sections below share, so the hero doesn't repeat it. Corner: the lopsided hero web, drawn
+// in three groups the stylesheet weights apart. Button: a small fan strung into the
+// top-right corner, mirrored in the markup.
+const web = heroWeb();
+const btnFan = cornerWeb({ r: 44, spokes: 5, rings: 4, sag: 0.2, seed: 7 });
+---
+
+<section class="hero" id="home">
+  <div class="hero-photo"></div>
+  <div class="hero-overlay"></div>
+  <svg class="hero-web" viewBox="0 0 400 440" fill="none" aria-hidden="true">
+    <g class="radials" stroke-width="1.2">
+      {web.radials.map((d) => <path d={d} pathLength="1" stroke="currentColor" vector-effect="non-scaling-stroke" />)}
+    </g>
+    <g class="spiral" stroke-width="0.7" opacity="0.55">
+      {web.rings.map((d) => <path d={d} pathLength="1" stroke="currentColor" vector-effect="non-scaling-stroke" />)}
+    </g>
+    <g class="dew">
+      {web.dew.map(([cx, cy]) => <circle cx={cx} cy={cy} r="1.3" fill="rgba(255,255,255,.6)" />)}
+    </g>
+  </svg>
+  <div class="hero-inner container">
+    <div class="hero-left">
+      <h1 class="hero-h1">
+        <span class="hero-line">Halloween</span><span class="hero-line">Archaeology Camp</span>
+        <span class="hero-sub">Dublin &middot; 27&ndash;30 October 2026 &middot; Ages 7&ndash;12</span>
+      </h1>
+      <p class="hero-p">
+        <span class="hero-p-full"
+          >Hands-on archaeology camps where children dig, uncover mysterious artefacts, explore
+          history, make friends and build confidence through unforgettable Halloween adventures.</span
+        ><span class="hero-p-short"
+          >Hands-on archaeology camps where children dig, uncover artefacts, make friends and build
+          confidence.</span
+        >
+      </p>
+      <div class="hero-btns">
+        <a href={site.bookingUrl} class="btn-amber" id="hero-book-btn" target="_blank" rel="noopener">
+          <svg class="btn-web" viewBox="0 0 48 48" aria-hidden="true"><path d={btnFan} transform="translate(48 0) scale(-1 1)" /></svg>
+          Book a Camp
+        </a>
+      </div>
+    </div>
+  </div>
+  <span class="ai-note">Background changed by AI</span>
+</section>
+<div class="scroll-hint-outer">
+  <div class="scroll-hint-inner">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+  </div>
+</div>

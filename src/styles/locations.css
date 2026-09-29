@@ -1,0 +1,60 @@
+/* ── LOCATIONS ── */
+
+/* decor: a moon low in the right column under the cards, its disc resting on the map's bottom
+   edge (the layout's height), so the lower edge of the section stays clear; bats fly off it
+   up-left towards the cards, small/far first. The box spans just the right column (the grid gap
+   is 40px) and .loc-list is lifted over it. Everything is sized in em off the box's font-size
+   (1em = 1/100 of the moon as drawn, before its 78% scale), so one declaration rescales moon, craters, glow and flock. */
+.loc-decor{position:absolute;top:0;bottom:0;left:calc(50% + 20px);right:0;font-size:2.4px;pointer-events:none}
+.loc-list{position:relative;z-index:1}
+/* a flat disc, craters a shade deeper than it so it reads as a moon, and one faint glow ring.
+   Drawn at 100em and scaled to 78% round its bottom centre: the disc still rests on the map's
+   bottom edge and keeps its centre line, with air around it. */
+.loc-moon{position:absolute;bottom:0;right:10em;width:100em;height:100em;border-radius:50%;
+  transform:scale(.78);transform-origin:50% 100%;
+  background:
+    radial-gradient(circle at calc(50% + .9em) calc(50% - 25.4em),#eec494 7.7em,transparent 7.9em),
+    radial-gradient(circle at calc(50% - 24.6em) calc(50% + 17.9em),#eec494 6.4em,transparent 6.6em),
+    radial-gradient(circle at calc(50% - 14.5em) calc(50% + 27.1em),#eec494 2.5em,transparent 2.7em),
+    radial-gradient(circle at calc(50% - 32.1em) calc(50% + 8.6em),#eec494 1.8em,transparent 2em),
+    #f7dbb7;
+  box-shadow:0 0 0 6em rgba(244,211,168,.2)}
+/* the moon's centre is at right:60em, bottom:39em; the first bat crosses the disc. The rest
+   rise, dip and rise again at uneven steps, so they read as a flight rather than a row. */
+.loc-bat{position:absolute;fill:#5e2f0a}
+.loc-bat:nth-of-type(1){right:75em;bottom:64em;width:10em;height:5em;opacity:.4;transform:rotate(-12deg)}
+.loc-bat:nth-of-type(2){right:93em;bottom:88em;width:12.5em;height:6.25em;opacity:.34;transform:rotate(12deg)}
+.loc-bat:nth-of-type(3){right:113em;bottom:79em;width:16em;height:8em;opacity:.3;transform:rotate(-3deg)}
+.loc-bat:nth-of-type(4){right:149em;bottom:99em;width:22em;height:11em;opacity:.26;transform:rotate(-14deg)}
+@media(max-width:960px){.loc-decor{font-size:1.6px}}
+/* phone: one column, no map, and no extra room for decor — the section keeps its height. The moon,
+   100px and unscaled, sits in the corner under the last card, its top half tucked behind it
+   (.loc-list is lifted over the decor), its centre 10px in from the viewport's edge, its bottom
+   2px clear of the seam (the divider's line ends well short of it); the lower craters show below the card. Two small bats fly off it
+   up-left: one beside the note, the other into the gap under the card, just slipping behind it. */
+@media(max-width:480px){
+  .loc-decor{left:0}
+  .loc-moon{transform:none;font-size:1px;right:-56px;bottom:-24px}
+  .loc-bat{display:none}
+  .loc-bat:nth-of-type(1){display:block;right:44px;bottom:-4px;width:16px;height:8px;opacity:.32;transform:rotate(-10deg)}
+  .loc-bat:nth-of-type(2){display:block;right:86px;bottom:22px;width:21px;height:10.5px;opacity:.26;transform:rotate(8deg)}}
+
+#locations .sec-head{margin-bottom:44px}
+#locations .sec-title{letter-spacing:.06em}
+.mob-locations-map-inner{position:relative;width:100%;height:100%;overflow:hidden;border-radius:10px}
+.loc-map-frame{border:0;position:absolute;top:-80px;left:0}
+.loc-layout{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.loc-map{border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.12);height:500px;position:relative}
+.loc-list{display:flex;flex-direction:column;gap:10px}
+.loc-card{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #e8e4dc;border-radius:9px;padding:16px 20px;cursor:pointer;color:inherit;text-decoration:none;transition:box-shadow .2s,transform .2s,border-color .2s}
+.loc-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.12);transform:translateX(4px);border-color:var(--amber)}
+/* pin: the schedule lantern, lit up on hover */
+.loc-pin{width:30px;height:30px;flex-shrink:0;transition:filter .2s}
+.loc-card:hover .loc-pin{filter:drop-shadow(0 0 4px rgba(255,220,120,.9)) drop-shadow(0 0 12px rgba(224,123,26,.75))}
+.loc-name{font-size:15px;font-weight:700;color:var(--text-dark)}
+.loc-sub{font-size:12px;color:var(--text-light);margin-top:2px}
+.loc-open{margin-left:auto;font-size:11px;color:var(--amber);font-weight:700;letter-spacing:.05em;white-space:nowrap;flex-shrink:0}
+.loc-note{font-size:12px;color:var(--text-light);margin-top:8px;text-align:center}
+.loc-meta{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:6px}
+.loc-dates{font-size:12px;font-weight:700;color:var(--amber)}
+.loc-time{font-size:12px;color:var(--text-light)}

@@ -1,0 +1,44 @@
+{
+  "tabs": [
+    {
+      "id": "dig",
+      "icon": "pickaxe",
+      "label": "Dig & Discover",
+      "cards": [
+        { "icon": "torch", "title": "Introduction to Archaeology", "desc": "Meet the tools of the trade and handle a display of real finds before the first trowel goes in." },
+        { "icon": "headstone", "title": "Big Dig Workshop", "desc": "Excavate a full-size dig site and uncover the artefacts people left behind thousands of years ago." },
+        { "icon": "bone", "title": "Skeleton Excavation", "desc": "Brush back the soil around a buried skeleton and work out the story its bones are telling." },
+        { "icon": "amphora", "title": "Monastic Site", "desc": "Dig into how Ireland's early monks lived and find the traces their settlements left in the ground." },
+        { "icon": "key", "title": "Treasure Hunt", "desc": "Follow clues across the camp, solve the challenges along the way and track down the hidden hoard." },
+        { "icon": "bat", "title": "And Much More…", "desc": "Mesolithic hut building, Dolmen workshop, Monastic Cross carving & more secrets to uncover!", "more": true }
+      ]
+    },
+    {
+      "id": "crafts",
+      "icon": "palette",
+      "label": "Crafts & Making",
+      "cards": [
+        { "icon": "test-tube", "title": "Witches' Cauldron Pot", "desc": "Shape the Cailleach's cauldron from raw clay using the pinch-pot method potters used in the Stone Age." },
+        { "icon": "crystal-ball", "title": "Viking Beads Workshop", "desc": "Thread a string of glass beads into a necklace any Viking trader would have been proud to carry." },
+        { "icon": "candle", "title": "Halloween Lanterns", "desc": "Make a lantern to light the dark half of the year, the way Samhain was marked long before pumpkins." },
+        { "icon": "mage", "title": "Witches & Wizards Wands", "desc": "Carve and decorate a wand of your own, then put it to work in a bit of camp sorcery." },
+        { "icon": "shield", "title": "Medieval & Viking Shields", "desc": "Build a battle-ready shield and paint it with your own Viking or medieval design." },
+        { "icon": "vampire", "title": "Coin-Striking & Pouches", "desc": "Strike a real metal coin, then hand-stitch a leather belt pouch to carry it home in." },
+        { "icon": "web", "title": "And Much More…", "desc": "Mummer masks, Viking spears, Stone Age axes, Ogham pendants, mosaics & weaving!", "more": true }
+      ]
+    },
+    {
+      "id": "games",
+      "icon": "pumpkin",
+      "label": "Games & Challenges",
+      "cards": [
+        { "icon": "bow", "title": "Archery & Sword Fighting", "desc": "Safe target practice and padded sword duels — train the way a medieval warrior would have." },
+        { "icon": "skull", "title": "Werewolf Charge", "desc": "One werewolf, a field of villagers and a howl before every charge. Cross the field if you dare!" },
+        { "icon": "bat", "title": "Bat, Bat, Cat", "desc": "Duck, duck, goose with fangs — sit tight in the circle and hope you're the one picked as the cat." },
+        { "icon": "ghost", "title": "Mummy Wrap", "desc": "Teams race to wrap one brave volunteer head to toe in toilet paper. Fastest mummy wins." },
+        { "icon": "spider", "title": "Mummies & Wool Ghosts", "desc": "Quieter making games between digs: a mummy built from cardboard, a ghost spun out of wool." },
+        { "icon": "candy", "title": "And More Spooky Fun…", "desc": "Word searches, pumpkin colouring, team challenges & Friday dress-up for every child and staff member!", "more": true }
+      ]
+    }
+  ]
+}

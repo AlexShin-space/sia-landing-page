@@ -1,0 +1,35 @@
+{
+  "columns": ["What matters", "Ordinary camps", "SIA Archaeology Camp"],
+  "rows": [
+    {
+      "icon": "line-target",
+      "label": "Purpose",
+      "ordinary": "Childcare and time-filling activities",
+      "sia": "Fun, <b>hands-on</b> learning and discovery"
+    },
+    {
+      "icon": "line-calendar",
+      "label": "Schedule Options",
+      "ordinary": "Only one schedule",
+      "sia": "<b>Flexible</b> 1, 3 or 4-day options"
+    },
+    {
+      "icon": "line-shield",
+      "label": "Staff",
+      "ordinary": "General camp staff",
+      "sia": "<b>Garda-vetted</b>, certified staff"
+    },
+    {
+      "icon": "line-scroll",
+      "label": "Programme",
+      "ordinary": "Basic activity-based programme",
+      "sia": "Historian-designed, <b>15+ years' experience</b>"
+    },
+    {
+      "icon": "line-puzzle",
+      "label": "Activities",
+      "ordinary": "Standard sports (football, etc.)",
+      "sia": "<b>Unique games</b> that bring history to life"
+    }
+  ]
+}

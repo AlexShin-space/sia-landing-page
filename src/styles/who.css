@@ -1,0 +1,39 @@
+/* ── WHO WE ARE ── */
+#who{position:relative}
+#who .container{position:relative;z-index:1}
+
+/* ghost pattern: revealed only in the padding bands and the side margins (union of the two gradients), never under the copy */
+.who-pattern{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
+  -webkit-mask-image:linear-gradient(#000 24px,transparent 84px,transparent calc(100% - 84px),#000 calc(100% - 24px)),linear-gradient(to right,#000,transparent max(5%,(100% - 1200px)/2),transparent calc(100% - max(5%,(100% - 1200px)/2)),#000);
+  mask-image:linear-gradient(#000 24px,transparent 84px,transparent calc(100% - 84px),#000 calc(100% - 24px)),linear-gradient(to right,#000,transparent max(5%,(100% - 1200px)/2),transparent calc(100% - max(5%,(100% - 1200px)/2)),#000)}
+.who-rect-sm{display:none}
+@media(max-width:960px){.who-pattern{display:none}} /* single column: copy reaches into the top/bottom bands */
+/* phone: there are no side margins to hide in, so the pattern shows through two soft pockets
+   instead — the corner beside the two short heading lines, and the strip of top padding on the
+   left. Radial layers (they union) keep it to those pockets without a second composite mode.
+   The desktop tile and the two pinned groups are all sized off the 1200px container, so the
+   phone swaps in the small tile and drops them. */
+@media(max-width:480px){
+  .who-pattern{display:block;
+    -webkit-mask-image:radial-gradient(205px 140px at 100% 46px,#000 52%,transparent 100%),radial-gradient(125px 62px at 6% 10px,#000 45%,transparent 100%);
+    mask-image:radial-gradient(205px 140px at 100% 46px,#000 52%,transparent 100%),radial-gradient(125px 62px at 6% 10px,#000 45%,transparent 100%)}
+  .who-rect,.who-extra{display:none}
+  .who-rect-sm{display:block}}
+
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.who-vis{position:relative}
+.who-box{width:100%;aspect-ratio:4/3;background:linear-gradient(140deg,#1c1a18,#0d0c0b);border-radius:10px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
+
+.who-float{position:absolute;bottom:-18px;right:-18px;background:var(--amber);color:#fff;padding:16px 20px;border-radius:7px;text-align:center;min-width:110px;box-shadow:0 8px 24px rgba(224,123,26,.35)}
+.who-float .n{font-family:var(--font-display);font-size:28px;font-weight:700;letter-spacing:.04em;display:block}
+.who-float .l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.9}
+.who-text p{font-size:15px;color:var(--text-mid);line-height:1.8;margin-bottom:14px}
+
+/* video thumbnail ("Watch our story") */
+.who-video{cursor:pointer}
+.who-box .who-video-img{width:100%;height:100%;object-fit:cover;display:block;border-radius:10px;transition:transform .3s ease}
+.who-video-shade{position:absolute;inset:0;background:rgba(0,0,0,.35);border-radius:10px;transition:background .3s}
+.who-video-play{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.who-video-btn{width:72px;height:72px;background:rgba(255,255,255,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,.35);transition:transform .2s,background .2s}
+.who-video-label{color:#fff;font-family:var(--font-display);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+

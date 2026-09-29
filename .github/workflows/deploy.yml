@@ -1,0 +1,48 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  # Let an in-flight production deployment finish: cancelling mid actions/deploy-pages
+  # can leave Pages serving a stale or half-applied build.
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Supplies the real origin and path prefix: a project site is served from
+      # /<repo>/, so the build needs `base` set or every /assets/... link 404s.
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Build with Astro
+        uses: withastro/action@v3
+        env:
+          SITE: ${{ steps.pages.outputs.origin }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        with:
+          node-version: 22
+          package-manager: npm@latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

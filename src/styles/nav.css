@@ -1,0 +1,77 @@
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5%;height:76px;display:flex;align-items:center;justify-content:space-between;background:transparent;transition:background .6s ease,backdrop-filter .6s ease,box-shadow .5s ease}
+nav.scrolled{background:rgba(10,9,8,0.96);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);box-shadow:0 2px 12px rgba(58,42,18,.28),0 0 0 1px rgba(255,255,255,.06)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-brand-group{display:flex;flex-direction:column;justify-content:center;line-height:1.25}
+.logo-brand-name{font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);white-space:nowrap}
+.logo-brand-tagline{font-style:italic;font-size:11px;color:var(--amber-light);letter-spacing:.02em;opacity:.85}
+
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--amber-light)}
+.nav-book{background:var(--amber)!important;color:#fff!important;padding:10px 22px;border-radius:3px;transition:background .2s!important}
+.nav-book:hover{background:var(--amber-dark)!important}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-toggle span{display:block;width:26px;height:2px;background:#fff}
+.mob-menu{position:fixed;top:76px;left:0;right:0;background:linear-gradient(160deg,#0d0c0b 0%,#141210 50%,#1a1815 100%);padding:16px 20px;display:flex;flex-direction:column;gap:4px;z-index:999;transform:translateY(-8px);opacity:0;pointer-events:none;transition:all .3s}
+.mob-menu.open{transform:none;opacity:1;pointer-events:all}
+.mob-menu a{padding:14px 16px;border-radius:6px;color:rgba(255,255,255,.7);text-decoration:none;font-size:15px;font-weight:700;letter-spacing:.04em;transition:background .15s}
+.mob-menu a:hover{background:rgba(255,255,255,.06)}
+
+.logo-img{height:34px;width:auto;object-fit:contain;display:block;flex-shrink:0}
+.mob-menu a.mob-book{background:var(--amber);color:#fff;margin-top:8px}
+
+/* ── Halloween decor: a witch hat on the logo, a spider behind the book button ──
+   Both behave the same over the hero and on the scrolled bar; only the backdrop changes. */
+
+/* hat: flat like the letters, no outline. Worn on the S, tipped 15deg to the left; the two things
+   that make it a witch's hat at this size are pushed: a wide, flat brim (about 1.3x the letter)
+   that sits a few px down over the S's top and runs past its left edge into the free space, and a
+   tip bent hard over to the right. Sized off the 34px logo (the S is 24x25px there), so the bar
+   keeps its height. The purple is the pricing badge's, the band the orange from the middle of the
+   logo's gradient. Lifts on hover, like a hat raised in greeting. */
+.logo{position:relative}
+.logo-hat{position:absolute;left:-1px;top:calc(50% - 26.5px);width:34px;height:auto;overflow:visible;pointer-events:none;
+  fill:#5b2f9c;stroke:#5b2f9c;stroke-width:.8;stroke-linejoin:round; /* stroke in the fill colour only rounds the tip */
+  transform-origin:50% 88.2%;transform:rotate(-15deg);transition:transform .3s cubic-bezier(.3,1.4,.6,1)}
+.logo-hat-band{fill:#e68222;stroke:none}
+.logo:hover .logo-hat,.logo:focus-visible .logo-hat{transform:translateY(-4px) rotate(-21deg)}
+@media(prefers-reduced-motion:reduce){.logo-hat{transition:none}}
+
+/* a real box rather than an inline with overflowing padding, so the spider can hide behind it */
+.nav-cta{position:relative}
+.nav-book{display:block;position:relative;z-index:1}
+
+/* spider: .nav-spider is a window from the button's top edge down, so the thread above the
+   button never shows; .nav-spider-hang (thread + spider) slides inside it. At rest the button
+   covers all but the tips of the back legs. .drop (hover, or the one-off teaser) lowers it
+   --drop on the thread; .fled (click/tap) yanks it back up. --peek is how far the rest pose
+   pokes out under the button, 130px is the window's reach below it. */
+.nav-spider{--peek:5px;--drop:52px;position:absolute;top:0;bottom:-130px;left:50%;width:80px;margin-left:-40px;overflow:hidden;pointer-events:none}
+.nav-spider-hang{position:absolute;left:26px;bottom:calc(130px - var(--peek));width:28px;height:117px;
+  transform-origin:50% calc(100% - var(--peek) - var(--drop)); /* once dropped: where the thread leaves the button */
+  transition:translate 1s ease-in-out;
+  transition:translate 1.5s linear(0,.28 10%,.3 26%,.56 36%,.58 52%,.84 62%,.86 78%,1 88%,1)} /* back up in pulls */
+.nav-spider-thread{position:absolute;left:50%;top:0;bottom:26px;width:1px;margin-left:-.5px;background:rgba(236,224,200,.5)}
+/* dark body; the warm rim keeps it off the dark hero */
+.nav-spider-svg{position:absolute;left:0;bottom:0;width:28px;height:27px;overflow:visible;color:#1c1510;
+  filter:drop-shadow(0 0 .8px rgba(255,200,130,.9)) drop-shadow(0 0 3px rgba(240,160,64,.3))}
+.nav-spider-svg .spider-leg{stroke-width:5;transform-box:view-box} /* origin: inline, at the leg's attachment */
+/* resting: the peeking legs twitch every 7s */
+.nav-spider:not(.drop) .spider-leg-4{animation:navSpiderTwitch 7s ease-in-out 3s infinite}
+.nav-spider:not(.drop) .spider-leg-3{animation:navSpiderTwitch 7s ease-in-out 3.08s infinite}
+/* dropped: falls, overshoots on the stretching thread and settles, swings out, then turns slowly
+   on the thread, paddling its legs */
+.nav-spider.drop .nav-spider-hang{translate:0 var(--drop);
+  transition:translate .4s cubic-bezier(.5,0,.8,1);
+  transition:translate .6s linear(0,.1 12%,.36 24%,.8 36%,1.14 46%,1.08 54%,.95 66%,1.03 80%,1);
+  animation:navSpiderSwing 2.4s ease-in-out .45s}
+.nav-spider.drop .nav-spider-svg{animation:navSpiderLook 6s ease-in-out .8s infinite}
+.nav-spider.drop .spider-gait-a{animation:navSpiderPaw 1.9s ease-in-out .6s infinite alternate}
+.nav-spider.drop .spider-gait-b{animation:navSpiderPaw 1.9s ease-in-out 1.55s infinite alternate}
+.nav-spider.fled .nav-spider-hang{transition:translate .2s cubic-bezier(.2,.7,.3,1)}
+@keyframes navSpiderTwitch{0%,86%,100%{transform:none}89%{transform:rotate(calc(var(--s)*-16deg))}92%{transform:rotate(calc(var(--s)*6deg))}95%{transform:rotate(calc(var(--s)*-9deg))}}
+@keyframes navSpiderSwing{0%,100%{rotate:0deg}14%{rotate:5deg}32%{rotate:-3.6deg}50%{rotate:2.2deg}68%{rotate:-1.2deg}84%{rotate:.5deg}}
+@keyframes navSpiderLook{0%,100%{transform:perspective(90px) rotateY(0)}30%{transform:perspective(90px) rotateY(40deg)}70%{transform:perspective(90px) rotateY(-35deg)}}
+@keyframes navSpiderPaw{to{transform:rotate(calc(var(--s)*10deg))}}
+@media(prefers-reduced-motion:reduce){.nav-spider *{animation:none!important;transition:none!important}}

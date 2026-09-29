@@ -1,0 +1,57 @@
+---
+import schedule from '../../data/schedule.json';
+import SectionHead from '../SectionHead.astro';
+import CornerWeb from '../CornerWeb.astro';
+import Bat from '../Bat.astro';
+import Emoji from '../Emoji.astro';
+const variants = ['a', 'b', 'c'];
+const tilts = [-8, 6, -4, 8, -6, 3, -7];
+---
+
+<section class="sec sec-parchment" id="schedule">
+  <!-- decor (desktop only): a bat flock leaving the web in the top-right corner.
+       Web goes last so .sched-bat:nth-of-type(n) counts bats only. -->
+  <span class="sched-decor">
+    <Bat class="sched-bat" />
+    <Bat class="sched-bat" />
+    <Bat class="sched-bat" />
+    <Bat class="sched-bat" />
+    <CornerWeb class="sched-web" />
+  </span>
+
+  <div class="container">
+    <SectionHead
+      label="A Day at Camp"
+      labelClass="sched-sec-label"
+      title="What Does a Camp Day Look Like?"
+    />
+    <div class="sched-timeline reveal">
+      <!-- paths are built in scripts/modules/schedule.js from the real pumpkin positions -->
+      <svg class="stl-vine" aria-hidden="true">
+        <path class="stl-vine-leaf" />
+        <path class="stl-vine-line" pathLength="1" />
+      </svg>
+      {
+        schedule.map((item, i) => (
+          <div class="stl-item" data-time={item.time}>
+            <div class="stl-time">{item.time}</div>
+            <div class="stl-dot" style={`--tilt:${tilts[i % tilts.length]}deg`}>
+              <svg aria-hidden="true"><use href={`#stl-pumpkin-${variants[i % variants.length]}`} /></svg>
+            </div>
+            <div class:list={['stl-card', { 'stl-accent': item.accent }]}>
+              <div class="stl-icon"><Emoji name={item.icon} /></div>
+              <div class="stl-body">
+                <div class="stl-body-row">
+                  <span class="stl-time-badge">{item.time}</span>
+                  <h4 class="stl-title">{item.title}</h4>
+                </div>
+                <p class="stl-desc">{item.desc}</p>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <p class="mob-tap-hint mob-tap-hint-sched"><Emoji name="point-up" />Tap to see details</p>
+  </div>
+</section>

@@ -1,0 +1,19 @@
+---
+// Photo strip shown above the booking CTA on mobile only (see mobile.css / mobile-extras.css).
+import { asset } from '../../lib/asset';
+---
+
+<div class="photo-banner reveal">
+  <img
+    src={asset("/assets/images/photo-two-kids.webp")}
+    alt=""
+    class="photo-banner-img"
+    width="1600"
+    height="1064"
+    loading="lazy"
+  />
+  <div class="photo-banner-overlay">
+    <span>Where every child becomes an explorer</span>
+  </div>
+  <span class="ai-note">Background changed by AI</span>
+</div>

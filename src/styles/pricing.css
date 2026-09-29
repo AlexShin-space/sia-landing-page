@@ -1,0 +1,72 @@
+/* ── PRICING (dark) ── */
+/* deep base with a muted purple glow falling from the top edge (stats has it rising from the bottom).
+   The base runs vertically (not the shared 160deg tilt) so the bottom edge is one flat colour, #161412,
+   that #founder picks up as its background: no seam between the two dark sections. */
+#pricing{background:
+  radial-gradient(ellipse 75% 50% at 45% 0%,rgba(74,32,128,.55) 0%,rgba(42,18,69,.3) 45%,transparent 75%),
+  linear-gradient(180deg,#090808 0%,#111010 55%,#161412 100%)}
+/* polish.css paints amber blobs on every .sec-deep: the top-right one would muddy the purple,
+   the bottom-left one is where #founder's storm lantern spills its light up across the seam */
+#pricing::before,#pricing::after{display:none}
+
+/* section decor (desktop only): a web in the purple top-left corner */
+.price-web{position:absolute;top:0;left:0;width:240px;height:240px;fill:none;stroke:#fff;stroke-width:1.2;opacity:.11;pointer-events:none}
+
+/* card 3: dark-brown fan generated in lib/corner-web.ts, in a layer clipped to the card's rounded corners */
+.pcard-clip{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none}
+.pcard-fan{position:absolute;top:0;right:0;width:190px;height:190px;overflow:visible;fill:none;stroke:rgba(70,30,0,.4);stroke-width:1.25;stroke-linecap:round;
+  -webkit-mask:radial-gradient(circle 200px at 100% 0,#000 50%,rgba(0,0,0,.35) 100%);mask:radial-gradient(circle 200px at 100% 0,#000 50%,rgba(0,0,0,.35) 100%)}
+/* card 2: spider in the top 70px, swaying from the thread's anchor; on hover the svg grows and the body drops,
+   the thread is drawn long and simply gets uncovered */
+.pcard-spider{position:absolute;top:0;right:34px;width:24px;height:68px;fill:rgba(255,255,255,.35);stroke:rgba(255,255,255,.35);stroke-width:1.1;stroke-linecap:round;pointer-events:none;
+  transform-origin:50% 0;animation:spiderSway 5s ease-in-out infinite alternate;transition:height 1.4s ease-in-out}
+.pcard-spider path{fill:none}
+.pcard-spider-thread{stroke:rgba(255,255,255,.25);stroke-width:.8}
+.pcard-spider g{transform:translateY(44px);transition:transform 1.4s ease-in-out}
+.pcard:hover .pcard-spider{height:132px}
+.pcard:hover .pcard-spider g{transform:translateY(106px)}
+@keyframes spiderSway{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+@media(prefers-reduced-motion:reduce){.pcard-spider{animation:none}}
+@media(max-width:960px){.price-decor,.pdecor{display:none}}
+/* phone: the section web stays gone (no margin beside the cards), but the per-card decor comes
+   back — it lives inside the card and takes no layout. The fan is sized for the short mobile row
+   and dropped under the feature list, which has to be lifted out of flow to get above it. */
+@media(max-width:480px){
+  .pdecor{display:block}
+  .pcard-clip{z-index:0}
+  .pfeats{position:relative;z-index:1}
+  .pcard-fan{width:120px;height:120px;opacity:.45;
+    -webkit-mask:radial-gradient(circle 130px at 100% 0,#000 50%,rgba(0,0,0,.35) 100%);mask:radial-gradient(circle 130px at 100% 0,#000 50%,rgba(0,0,0,.35) 100%)}
+  /* no viewBox on the spider (the hover drop works by uncovering a long thread), so it is moved,
+     not scaled. It hangs just right of the icon column, in the strip before the price: column 3
+     is filled top to bottom by the feature text, and the divider at 170 put it in the gutter
+     between the two. */
+  .pcard-spider{right:auto;left:42px}}
+
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:860px;margin:0 auto}
+.pcard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:11px;padding:32px 24px;text-align:center;position:relative;transition:transform .2s,border-color .2s;display:flex;flex-direction:column;align-items:center}
+.pcard:hover{transform:translateY(-5px);border-color:rgba(224,123,26,.3)}
+.pcard.feat{background:linear-gradient(145deg,var(--amber) 0%,var(--amber-dark) 100%);border-color:var(--amber-dark);box-shadow:0 4px 24px rgba(224,123,26,.25),inset 0 1px 0 rgba(255,255,255,.15)}
+.pbadge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#5b2f9c;color:#fff;box-shadow:0 4px 14px rgba(40,10,80,.45);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:100px}
+.picon{font-size:32px;margin-bottom:12px;height:48px;display:flex;align-items:center;justify-content:center}
+.pnow{font-family:var(--font-display);font-size:48px;font-weight:700;color:var(--amber);letter-spacing:.03em;line-height:1;margin-bottom:3px}
+.pcard.feat .pnow{color:#fff}
+.pwas{font-size:15px;font-weight:700;color:rgba(255,255,255,.55);text-decoration:line-through;margin-bottom:3px;letter-spacing:.02em;min-height:22px;display:flex;align-items:center;justify-content:center}
+.pcard.feat .pwas{color:rgba(0,0,0,.45);font-weight:700}
+.pname{font-family:var(--font-display);font-size:18px;letter-spacing:.06em;text-transform:uppercase;color:#fff;margin-bottom:16px}
+.pcard.feat .pname{color:#0d0d0d}
+
+.pfeats{list-style:none;text-align:left;display:flex;flex-direction:column;gap:8px;margin-bottom:24px;width:100%;flex:1}
+.pfeats li{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:rgba(255,255,255,.6)}
+.pcard.feat .pfeats li{color:rgba(10,24,16,.8)}
+.pchk{color:var(--amber);font-weight:700;flex-shrink:0}
+.pcard.feat .pchk{color:#0d0d0d}
+.pcta{display:block;width:100%;padding:12px;border-radius:5px;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;text-align:center;cursor:pointer;border:1px solid rgba(255,255,255,.2);background:transparent;color:#fff;transition:all .2s;margin-top:auto}
+.pcta:hover{background:rgba(255,255,255,.08)}
+.pcard.feat .pcta{background:linear-gradient(160deg,#111010 0%,#181614 50%,#1c1a18 100%);color:#fff;border-color:var(--green-deep)}
+.pcard.feat .pcta:hover{background:#2a2826}
+
+#pricing .sec-head{margin-bottom:0}
+#pricing .pgrid{margin-bottom:14px}
+/* desktop: the boughs on the seam (Founder.astro) reach ~60px up into this section, keep the cards clear of them */
+@media(min-width:1025px){#pricing{padding-bottom:130px}}

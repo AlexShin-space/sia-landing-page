@@ -1,0 +1,50 @@
+---
+import data from '../../data/activities.json';
+import SectionHead from '../SectionHead.astro';
+import CornerWeb from '../CornerWeb.astro';
+import Emoji from '../Emoji.astro';
+const delays = ['', 'd1', 'd2', 'd3'];
+---
+
+<section class="sec sec-deep" id="activities">
+    <CornerWeb class="act-web" />
+  <div class="container">
+    <SectionHead label="Halloween Camp" title="More Camp Activities" light />
+    <div class="act-tabs reveal">
+      {
+        data.tabs.map((tab, i) => (
+          <button
+            class:list={['act-tab', { active: i === 0 }]}
+            type="button"
+            data-action="act-tab"
+            data-tab={tab.id}
+          >
+            <Emoji name={tab.icon} /> {tab.label}
+          </button>
+        ))
+      }
+    </div>
+
+    {
+      data.tabs.map((tab, i) => (
+        <div class:list={['act-panel', { active: i === 0 }]} id={`p-${tab.id}`}>
+          {tab.cards.map((card, j) => (
+            <div
+              class:list={[
+                'acard',
+                { 'acard-more': card.more },
+                'reveal',
+                delays[j % delays.length],
+              ]}
+            >
+              <div class="acard-icon"><Emoji name={card.icon} /></div>
+              <h4>{card.title}</h4>
+              <p>{card.desc}</p>
+            </div>
+          ))}
+        </div>
+      ))
+    }
+    <p class="mob-tap-hint"><Emoji name="point-up" />Tap each activity to see details</p>
+  </div>
+</section>
